@@ -146,6 +146,7 @@ class Bullet {
       ) {
         this.game.checkAnswer(index, { x: this.x, y: this.y });
         this.el.remove();
+        this.isDead = true;
         return false;
       }
     });
