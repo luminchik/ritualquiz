@@ -14,3 +14,7 @@ yarn-error.log*
 # Прочее
 .DS_Store
 Thumbs.db
+
+# Local databases and session stores
+db/
+sessions/
