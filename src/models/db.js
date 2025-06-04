@@ -29,6 +29,7 @@ function initDatabase() {
                 userId TEXT NOT NULL,
                 username TEXT NOT NULL,
                 score INTEGER NOT NULL,
+                duration INTEGER,
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
@@ -57,16 +58,16 @@ function insertTestData() {
     console.log('Добавляем тестовые данные в лидерборд...');
     
     const testData = [
-        { userId: '12345', username: 'lumin.eth', score: 70 }
+        { userId: '12345', username: 'lumin.eth', score: 70, duration: 30 }
     ];
-    
+
     const stmt = db.prepare(`
-        INSERT INTO scores (userId, username, score)
-        VALUES (?, ?, ?)
+        INSERT INTO scores (userId, username, score, duration)
+        VALUES (?, ?, ?, ?)
     `);
     
     testData.forEach(data => {
-        stmt.run(data.userId, data.username, data.score, (err) => {
+        stmt.run(data.userId, data.username, data.score, data.duration, (err) => {
             if (err) {
                 console.error('Ошибка при добавлении тестовых данных:', err);
             }
@@ -89,7 +90,7 @@ function getLeaderboard(limit = 10) {
                 FROM scores
                 GROUP BY username
             )
-            SELECT s.username, s.score, s.timestamp
+            SELECT s.username, s.score, s.duration, s.timestamp
             FROM scores s
             JOIN MaxScores m ON s.username = m.username AND s.score = m.maxScore
             ORDER BY s.score DESC
@@ -112,11 +113,11 @@ function getLeaderboard(limit = 10) {
  * @param {number} score - счет
  * @returns {Promise<number>} - промис с ID новой записи
  */
-function saveScore(userId, username, score) {
+function saveScore(userId, username, score, duration) {
     return new Promise((resolve, reject) => {
         db.run(
-            `INSERT INTO scores (userId, username, score) VALUES (?, ?, ?)`,
-            [userId, username, score],
+            `INSERT INTO scores (userId, username, score, duration) VALUES (?, ?, ?, ?)`,
+            [userId, username, score, duration],
             function (err) {
                 if (err) {
                     console.error('Ошибка при сохранении счета:', err);

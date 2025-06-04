@@ -283,6 +283,7 @@ class Game {
     this.quiz = quiz;
     this.timeLeft = 20;
     this.canAnswer = true;
+    this.startTime = null;
 
     // Load background and planets during intro screen
     this.createSpaceBackground();
@@ -298,6 +299,7 @@ class Game {
 
   startGame() {
     // Initialize player and start displaying elements after intro
+    this.startTime = Date.now();
     this.player = new Player({
       controls: this.controls,
       parentContainer: this.container,
@@ -515,17 +517,19 @@ class Game {
       userInfo = `<p class="user-result">Player: ${usernameElement.text()}</p>`;
     }
     
+    const duration = Math.floor((Date.now() - this.startTime) / 1000);
     const gameOverEl = $(
       `<div class='game-over'>
          ${userInfo}
          <p>Final Score: ${this.quiz.score}</p>
+         <p>Time: ${duration}s</p>
        </div>`
     );
     
     this.container.append(gameOverEl);
     
     // Сохраняем счет если пользователь авторизован
-    saveScore(this.quiz.score);
+    saveScore(this.quiz.score, duration);
   }
 }
 
@@ -535,14 +539,14 @@ function getRandom(min, max) {
 
 
 // Функция для сохранения счета пользователя
-async function saveScore(score) {
+async function saveScore(score, duration) {
   try {
     const response = await fetch('/api/save-score', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ score })
+      body: JSON.stringify({ score, duration })
     });
     const data = await response.json();
     console.log('Счет сохранен:', data);

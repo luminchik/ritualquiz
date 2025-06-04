@@ -80,12 +80,12 @@ exports.saveScore = (req, res) => {
     return res.status(401).json({ error: 'You must be logged in to save scores' });
   }
   
-  const { score } = req.body;
+  const { score, duration } = req.body;
   const userId = req.user.id;
   const username = req.user.username;
-  
+
   // Сохраняем счет в базе данных
-  db.saveScore(userId, username, score)
+  db.saveScore(userId, username, score, duration)
     .then(id => res.json({ success: true, id }))
     .catch(err => {
       console.error('Ошибка сохранения счета:', err);
