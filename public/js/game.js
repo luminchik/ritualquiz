@@ -120,7 +120,7 @@ class Bullet {
       this.y < 0 || this.y > window.innerHeight
     ) {
       this.el.remove();
-      this.isDead = true;        // помечаем как «удалён»
+      this.isDead = true; // помечаем пулю как удаленную
       return;
     }
 
