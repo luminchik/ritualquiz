@@ -13,9 +13,6 @@ class Quiz {
       console.log(`Загружено ${this.questions.length} вопросов`);
     } catch (error) {
       console.error("Ошибка при загрузке вопросов:", error);
-      // При ошибке загружаем из локального файла как резервный вариант
-      const localResp = await fetch("questions.json");
-      this.questions = await localResp.json();
     }
   }
 
