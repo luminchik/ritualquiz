@@ -535,61 +535,6 @@ function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-// Функции для работы с Discord авторизацией
-async function checkAuthStatus() {
-  try {
-    const response = await fetch('/api/auth-status');
-    const data = await response.json();
-    
-    if (data.authenticated) {
-      // Пользователь авторизован
-      $('#not-logged').hide();
-      $('#logged-in').show();
-      $('#username').text(data.user.username);
-      
-      // Устанавливаем аватар пользователя
-      if (data.user.avatar) {
-        const avatarUrl = `https://cdn.discordapp.com/avatars/${data.user.id}/${data.user.avatar}.png`;
-        $('#user-avatar').attr('src', avatarUrl);
-      } else {
-        // Дефолтный аватар если у пользователя нет аватара
-        $('#user-avatar').attr('src', 'https://cdn.discordapp.com/embed/avatars/0.png');
-      }
-      
-      return true;
-    } else {
-      // Пользователь не авторизован
-      $('#not-logged').show();
-      $('#logged-in').hide();
-      return false;
-    }
-  } catch (error) {
-    console.error('Ошибка при проверке статуса авторизации:', error);
-    return false;
-  }
-}
-
-// Обработчики событий для кнопок авторизации
-function setupAuthButtons() {
-  // Кнопка входа через Discord
-  $('#discord-login').on('click', function() {
-    window.location.href = '/auth/discord';
-  });
-  
-  // Кнопка выхода
-  $('#logout').on('click', function() {
-    window.location.href = '/auth/logout';
-  });
-  
-  // Проверяем URL для параметра loggedIn
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('loggedIn') === 'true') {
-    // Обновляем интерфейс после успешного входа
-    checkAuthStatus();
-    // Очищаем URL
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-}
 
 // Функция для сохранения счета пользователя
 async function saveScore(score) {
@@ -608,23 +553,6 @@ async function saveScore(score) {
   }
 }
 
-function createSpaceBackground() {
-  const spaceBackground = $("#space-background");
-  if (spaceBackground.length) {
-    spaceBackground.css({
-      'position': 'fixed',
-      'top': 0,
-      'left': 0,
-      'width': '100%',
-      'height': '100%',
-      'z-index': -1,
-      'overflow': 'hidden',
-      'background-image': 'url("../images/backgroundseismic.png")',
-      'background-size': '100% 100%',
-      'background-position': 'center'
-    });
-  }
-}
 
 $(async function () {
   // Инициализация авторизации
@@ -632,7 +560,7 @@ $(async function () {
   await checkAuthStatus();
   
   // Создаем фон
-  createSpaceBackground();
+  createSpaceBackground("images/backgroundseismic.png");
   
   // Обработчик для кнопки запуска игры (изображение)
   $("#intro-image").on("click", async function() {

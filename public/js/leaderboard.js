@@ -68,82 +68,6 @@ async function loadLeaderboard() {
   }
 }
 
-// Функции для работы с Discord авторизацией
-async function checkAuthStatus() {
-  try {
-    const response = await fetch('/api/auth-status');
-    const data = await response.json();
-    
-    if (data.authenticated) {
-      // Пользователь авторизован
-      $('#not-logged').hide();
-      $('#logged-in').show();
-      $('#username').text(data.user.username);
-      
-      // Устанавливаем аватар пользователя
-      if (data.user.avatar) {
-        const avatarUrl = `https://cdn.discordapp.com/avatars/${data.user.id}/${data.user.avatar}.png`;
-        $('#user-avatar').attr('src', avatarUrl);
-      } else {
-        // Дефолтный аватар если у пользователя нет аватара
-        $('#user-avatar').attr('src', 'https://cdn.discordapp.com/embed/avatars/0.png');
-      }
-      
-      return true;
-    } else {
-      // Пользователь не авторизован
-      $('#not-logged').show();
-      $('#logged-in').hide();
-      return false;
-    }
-  } catch (error) {
-    console.error('Error checking auth status:', error);
-    return false;
-  }
-}
-
-function setupAuthButtons() {
-  // Кнопка входа через Discord
-  $('#discord-login').on('click', function() {
-    window.location.href = '/auth/discord';
-  });
-  
-  // Кнопка выхода
-  $('#logout').on('click', function() {
-    window.location.href = '/auth/logout';
-  });
-  
-  // Проверяем URL для параметра loggedIn
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('loggedIn') === 'true') {
-    // Обновляем интерфейс после успешного входа
-    checkAuthStatus();
-    // Очищаем URL
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-}
-
-// Создаем фон (как в основной игре)
-function createSpaceBackground() {
-  console.log('Создаем фон...');
-  const spaceBackground = $("#space-background");
-  if (spaceBackground.length === 0) {
-    console.log('Создаем новый элемент фона...');
-    $("<div id='space-background'></div>").css({
-      'position': 'fixed',
-      'top': 0,
-      'left': 0,
-      'width': '100%',
-      'height': '100%',
-      'z-index': -1,
-      'overflow': 'hidden',
-      'background-image': 'url("vulkan.png")',
-      'background-size': '100% 100%',
-      'background-position': 'center'
-    }).prependTo("body");
-    console.log('Фон создан.');
-  }
-}
 
 // Инициализация при загрузке страницы
 $(document).ready(function() {
@@ -151,7 +75,7 @@ $(document).ready(function() {
   console.log('jQuery версия:', $.fn.jquery);
   
   try {
-    createSpaceBackground();
+    createSpaceBackground("images/vulkan.png");
     console.log('Настраиваем кнопки авторизации...');
     setupAuthButtons();
     console.log('Проверяем статус авторизации...');
