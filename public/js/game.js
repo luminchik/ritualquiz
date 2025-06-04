@@ -285,6 +285,8 @@ class Game {
     this.quiz = quiz;
     this.timeLeft = 20;
     this.canAnswer = true;
+    this.gameOver = false;
+    this.timerInterval = null;
 
     // Load background and planets during intro screen
     this.createSpaceBackground();
@@ -325,6 +327,7 @@ class Game {
   }
 
   update() {
+    if (this.gameOver) return;
     this.updateFuncs.forEach((func) => func());
     this.updateFuncs = this.updateFuncs.filter(func => !func.isDead); // Удаляем "мертвые" объекты
     window.requestAnimationFrame(this.update.bind(this));
@@ -508,6 +511,9 @@ class Game {
   }
 
   endGame() {
+    this.gameOver = true;
+    clearInterval(this.timerInterval);
+    this.updateFuncs = [];
     // Получаем информацию пользователя (если он авторизован)
     let userInfo = "";
     const usernameElement = $("#username");
