@@ -1,6 +1,6 @@
 # Seismic Quiz Game
 
-An interactive quiz game with Discord authentication built with Node.js and Express. Players can log in using their Discord account, answer quiz questions and track high scores on a leaderboard stored in SQLite.
+An interactive quiz game with Discord authentication built with Node.js and Express. Players can log in using their Discord account, answer quiz questions and track high scores on a leaderboard stored in SQLite. Each saved score now also records how long it took to finish the quiz and this time appears on the leaderboard.
 
 ## Requirements
 

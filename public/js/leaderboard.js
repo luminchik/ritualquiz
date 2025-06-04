@@ -4,7 +4,7 @@ async function loadLeaderboard() {
     console.log('Запрашиваем данные лидерборда...');
     
     // Очищаем таблицу и показываем сообщение о загрузке
-    $('#leaderboard-body').html('<tr><td colspan="4">Loading leaderboard data...</td></tr>');
+    $('#leaderboard-body').html('<tr><td colspan="5">Loading leaderboard data...</td></tr>');
     
     const response = await fetch('/api/leaderboard');
     console.log('Ответ получен:', response);
@@ -18,7 +18,7 @@ async function loadLeaderboard() {
     
     if (!Array.isArray(data)) {
       console.error('Неверный формат данных:', data);
-      $('#leaderboard-body').html('<tr><td colspan="4">Error: Invalid data format</td></tr>');
+      $('#leaderboard-body').html('<tr><td colspan="5">Error: Invalid data format</td></tr>');
       return;
     }
     
@@ -55,6 +55,9 @@ async function loadLeaderboard() {
           .text(entry.score || 0)
           .appendTo(tr);
         $('<td>')
+          .text((entry.duration || 0) + 's')
+          .appendTo(tr);
+        $('<td>')
           .text(formattedDate)
           .appendTo(tr);
         tbody.append(tr);
@@ -62,7 +65,7 @@ async function loadLeaderboard() {
     }
   } catch (error) {
     console.error('Error loading leaderboard:', error);
-    $('#leaderboard-body').html('<tr><td colspan="4">Error loading leaderboard: ' + error.message + '</td></tr>');
+    $('#leaderboard-body').html('<tr><td colspan="5">Error loading leaderboard: ' + error.message + '</td></tr>');
     $('#global-leaderboard').show();
     $('#no-scores').hide();
   }
