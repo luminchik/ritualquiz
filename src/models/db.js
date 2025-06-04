@@ -114,19 +114,18 @@ function getLeaderboard(limit = 10) {
  */
 function saveScore(userId, username, score) {
     return new Promise((resolve, reject) => {
-        const stmt = db.prepare(`
-            INSERT INTO scores (userId, username, score)
-            VALUES (?, ?, ?)
-        `);
-        
-        stmt.run(userId, username, score, function(err) {
-            if (err) {
-                console.error('Ошибка при сохранении счета:', err);
-                reject(err);
-            } else {
-                resolve(this.lastID);
+        db.run(
+            `INSERT INTO scores (userId, username, score) VALUES (?, ?, ?)`,
+            [userId, username, score],
+            function (err) {
+                if (err) {
+                    console.error('Ошибка при сохранении счета:', err);
+                    reject(err);
+                } else {
+                    resolve(this.lastID);
+                }
             }
-        });
+        );
     });
 }
 
