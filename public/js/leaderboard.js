@@ -43,14 +43,21 @@ async function loadLeaderboard() {
         
         const rankClass = index < 3 ? `rank-${index + 1}` : '';
         
-        tbody.append(`
-          <tr>
-            <td class="rank ${rankClass}">${index + 1}</td>
-            <td>${entry.username || 'Unknown'}</td>
-            <td>${entry.score || 0}</td>
-            <td>${formattedDate}</td>
-          </tr>
-        `);
+        const tr = $('<tr>');
+        $('<td>')
+          .addClass('rank ' + rankClass)
+          .text(index + 1)
+          .appendTo(tr);
+        $('<td>')
+          .text(entry.username || 'Unknown')
+          .appendTo(tr);
+        $('<td>')
+          .text(entry.score || 0)
+          .appendTo(tr);
+        $('<td>')
+          .text(formattedDate)
+          .appendTo(tr);
+        tbody.append(tr);
       });
     }
   } catch (error) {
