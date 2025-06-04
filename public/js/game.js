@@ -85,7 +85,7 @@ class Bullet {
     this.dir = options.dir;
     this.game = options.game;
     this.el = this.createElement(options.parentContainer);
-    options.startUpdating(this.update.bind(this));
+    options.startUpdating(this); // передаем объект для обновления
     this.isDead = false;
   }
 
@@ -146,6 +146,7 @@ class Bullet {
       ) {
         this.game.checkAnswer(index, { x: this.x, y: this.y });
         this.el.remove();
+        this.isDead = true; // помечаем пулю как удаленную
         return false;
       }
     });
@@ -174,7 +175,7 @@ class Player {
     this.trailSpawnRate = 1;
     this.shootDown = false;
     this.el = this.createElement(options.parentContainer);
-    this.startUpdating(this.update.bind(this));
+    this.startUpdating(this); // передаем сам объект для обновления
   }
 
   createElement(parentContainer) {
@@ -325,13 +326,14 @@ class Game {
   }
 
   update() {
-    this.updateFuncs.forEach((func) => func());
-    this.updateFuncs = this.updateFuncs.filter(func => !func.isDead); // Удаляем "мертвые" объекты
+    this.updateFuncs.forEach((obj) => obj.update());
+    // Удаляем "мертвые" объекты
+    this.updateFuncs = this.updateFuncs.filter(obj => !obj.isDead);
     window.requestAnimationFrame(this.update.bind(this));
   }
 
-  startUpdating(func) {
-    this.updateFuncs.push(func);
+  startUpdating(obj) {
+    this.updateFuncs.push(obj);
   }
 
   displayQuestion() {
