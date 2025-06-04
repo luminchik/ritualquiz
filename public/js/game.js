@@ -499,10 +499,9 @@ class Game {
 
   displayQuestionCount() {
     $(".question-count").remove();
+    const total = this.quiz.questions.length;
     const countEl = $(
-      "<div class='question-count'>Question: " +
-        (this.quiz.currentQuestion + 1) +
-        "/10</div>"
+      `<div class='question-count'>Question: ${this.quiz.currentQuestion + 1}/${total}</div>`
     );
     this.container.append(countEl);
   }
