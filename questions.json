@@ -1,0 +1,302 @@
+[
+  {
+      "id": 1,
+      "question": "What is Seismic?",
+      "answers": ["Encrypted layer‑1 blockchain", "Layer‑2 rollup", "Proof‑of‑Work chain", "Sidechain"],
+      "correct": 0
+  },
+  {
+      "id": 2,
+      "question": "What is Seismic's mission?",
+      "answers": ["To encrypt all blockchains", "To scale Bitcoin transactions", "To create an NFT marketplace", "To replace PayPal"],
+      "correct": 0
+  },
+  {
+      "id": 3,
+      "question": "Which secure‑enclave technology does Seismic use?",
+      "answers": ["Intel TDX", "Intel SGX", "AMD SEV‑SNP", "ARM TrustZone"],
+      "correct": 0
+  },
+  {
+      "id": 4,
+      "question": "Which new opcodes were added to Seismic's EVM for working with encrypted storage?",
+      "answers": ["CLOAD / CSTORE", "ELOAD / ESTORE", "TLOAD / TSTORE", "MLOAD / MSTORE"],
+      "correct": 0
+  },
+  {
+      "id": 5,
+      "question": "Which of the following is NOT one of the three key properties required for encrypted smart contracts in Seismic?",
+      "answers": ["Encrypted consensus", "Encrypted global state", "Encrypted memory access", "Encrypted orchestration"],
+      "correct": 0
+  },
+  {
+      "id": 6,
+      "question": "How many primitive types does stype include in Seismic?",
+      "answers": ["Three", "Two", "Four", "Five"],
+      "correct": 0
+  },
+  {
+      "id": 7,
+      "question": "Which data type represents an encrypted integer in Seismic?",
+      "answers": ["suint / sint", "sbool", "saddress", "uint256"],
+      "correct": 0
+  },
+  {
+      "id": 8,
+      "question": "Which restriction applies to stype variables?",
+      "answers": ["They cannot be returned from public functions", "They cannot be used in a mapping", "They cannot be explicitly cast", "They must be constants"],
+      "correct": 0
+  },
+  {
+      "id": 9,
+      "question": "Which Chain ID is used in the Seismic Devnet?",
+      "answers": ["5124", "1337", "11155111", "1"],
+      "correct": 0
+  },
+  {
+      "id": 10,
+      "question": "Which currency symbol is used in the Seismic Devnet?",
+      "answers": ["ETH", "SEIS", "BTC", "DEV"],
+      "correct": 0
+  },
+  {
+      "id": 11,
+      "question": "Which tool serves as the test framework in the local Seismic toolkit?",
+      "answers": ["sforge", "foundry", "hardhat", "truffle"],
+      "correct": 0
+  },
+  {
+      "id": 12,
+      "question": "Which tool launches a local Seismic node?",
+      "answers": ["sanvil", "geth", "ganache", "anvil"],
+      "correct": 0
+  },
+  {
+      "id": 13,
+      "question": "Which compiler is recommended for Seismic smart contracts?",
+      "answers": ["ssolc", "solc", "vyper", "clang"],
+      "correct": 0
+  },
+  {
+      "id": 14,
+      "question": "What is the name of the Seismic toolchain installation script?",
+      "answers": ["sfoundryup", "npm install", "rustup‑init", "brew install seismic"],
+      "correct": 0
+  },
+  {
+      "id": 15,
+      "question": "Which domain is used for the Devnet faucet URL?",
+      "answers": ["seismicdev.net", "seismic.systems", "faucet.seismic.com", "spigot.seismic.dev"],
+      "correct": 0
+  },
+  {
+      "id": 16,
+      "question": "Which language are Seismic smart contracts primarily written in?",
+      "answers": ["Solidity", "Rust", "Go", "Python"],
+      "correct": 0
+  },
+  {
+      "id": 17,
+      "question": "Which memory segments does Seismic clone from the EVM?",
+      "answers": ["All major EVM segments", "Only calldata", "Only storage", "Only stack"],
+      "correct": 0
+  },
+  {
+      "id": 18,
+      "question": "Which funding round did Seismic announce on March 6, 2025?",
+      "answers": ["$7 M led by a16z crypto", "$70 M Series B", "$1 M seed from Y Combinator", "$500 K angel round"],
+      "correct": 0
+  },
+  {
+      "id": 19,
+      "question": "Which of the following investors joined the $7 M round besides a16z crypto?",
+      "answers": ["Polychain", "Paradigm", "Sequoia", "SoftBank"],
+      "correct": 0
+  },
+  {
+      "id": 20,
+      "question": "When was the blog post \"Introducing Seismic\" published?",
+      "answers": ["February 18, 2025", "March 18, 2025", "January 1, 2024", "April 2, 2025"],
+      "correct": 0
+  },
+  {
+      "id": 21,
+      "question": "Which of the following types is an elementary stype?",
+      "answers": ["sbool", "uint128", "bytes32", "address payable"],
+      "correct": 0
+  },
+  {
+      "id": 22,
+      "question": "Which command installs Rust during the Devnet setup?",
+      "answers": ["curl https://sh.rustup.rs -sSf | sh", "apt‑get install rust", "brew rust", "rustc install"],
+      "correct": 0
+  },
+  {
+      "id": 23,
+      "question": "Which OS is NOT listed as supported for the local Seismic toolkit?",
+      "answers": ["FreeBSD", "macOS", "Ubuntu", "Windows via WSL"],
+      "correct": 0
+  },
+  {
+      "id": 24,
+      "question": "Which network name should be added in MetaMask for the Seismic Devnet?",
+      "answers": ["Seismic devnet", "Seismic mainnet", "Seismic testnet v2", "Seismic demo"],
+      "correct": 0
+  },
+  {
+      "id": 25,
+      "question": "Which WebSocket endpoint is used to connect to the Devnet?",
+      "answers": ["wss://node-2.seismicdev.net/ws", "https://node-2.seismicdev.net/rpc", "wss://example.com/ws", "https://seismic.systems/ws"],
+      "correct": 0
+  },
+  {
+      "id": 26,
+      "question": "What do third‑party observers see instead of stype values in execution traces?",
+      "answers": ["0x000", "Random bytes", "Plain text", "Hash values"],
+      "correct": 0
+  },
+  {
+      "id": 27,
+      "question": "Which action is PERMITTED for stype variables?",
+      "answers": ["Explicit casting to an unencrypted type", "Returning via a public getter", "Using them as constants", "Implicit type coercion"],
+      "correct": 0
+  },
+  {
+      "id": 28,
+      "question": "Which script is used to deploy the encrypted contract in the starter repository?",
+      "answers": ["bash script/deploy.sh", "npm run deploy", "forge script deploy", "sanvil deploy"],
+      "correct": 0
+  },
+  {
+      "id": 29,
+      "question": "What do observers see instead of encrypted values during transaction execution?",
+      "answers": ["0x000", "Random hash", "Alias", "Plain text"],
+      "correct": 0
+  },
+  {
+      "id": 30,
+      "question": "Which alternative to Intel TDX is mentioned in the documentation as promising?",
+      "answers": ["AMD SEV‑SNP", "Qualcomm HyperVisor", "Apple Secure Enclave", "Samsung Knox"],
+      "correct": 0
+  },
+  {
+      "id": 31,
+      "question": "What is the name of the GitHub repository listed as the starter for the Devnet?",
+      "answers": ["seismic-starter", "seismic-foundry", "try-devnet", "seismic-viem"],
+      "correct": 0
+  },
+  {
+      "id": 32,
+      "question": "Which package manager is used to install jq on macOS according to the Seismic guide?",
+      "answers": ["Homebrew", "MacPorts", "Chocolatey", "Conda"],
+      "correct": 0
+  },
+  {
+      "id": 33,
+      "question": "Which step of the sfoundryup installation can 'hang' at 98%?",
+      "answers": ["sfoundryup itself reports that the delay is normal", "Downloading VC libraries", "Compiling OpenSSL", "Running cargo tests"],
+      "correct": 0
+  },
+  {
+      "id": 34,
+      "question": "Is the Seismic Devnet incentivized?",
+      "answers": ["No, there are no rewards", "Yes, SEIS tokens are distributed", "Only for the top 100 developers", "Yes, payouts in ETH"],
+      "correct": 0
+  },
+  {
+      "id": 35,
+      "question": "Which advantage of secure enclaves allows Seismic to protect data 'in use'?",
+      "answers": ["Confidential compute in secure enclaves", "Proof‑of‑Stake", "Zero‑knowledge proofs", "Sharding"],
+      "correct": 0
+  },
+  {
+      "id": 36,
+      "question": "At which level does Seismic focus its encryption?",
+      "answers": ["Protocol level", "Wallet level", "Layer 2 level", "Consensus level only"],
+      "correct": 0
+  },
+  {
+      "id": 37,
+      "question": "Which domain hosts Seismic's developer documentation?",
+      "answers": ["docs.seismic.systems", "docs.seismic.dev", "developers.seismic.systems", "seismicdocs.io"],
+      "correct": 0
+  },
+  {
+      "id": 38,
+      "question": "Which command removes old build artifacts in Seismic projects?",
+      "answers": ["sforge clean", "sanvil reset", "ssolc clean", "cargo clean"],
+      "correct": 0
+  },
+  {
+      "id": 39,
+      "question": "Which property is critically important for encrypted DeFi according to Seismic?",
+      "answers": ["Encrypted global state", "Unlimited TPS", "Low fees", "Minting NFTs"],
+      "correct": 0
+  },
+  {
+      "id": 40,
+      "question": "How many memory regions does Seismic create after cloning EVM segments?",
+      "answers": ["Two — cleartext and encrypted", "Two — hot and cold", "Two — volatile and non‑volatile", "Two — primary and secondary"],
+      "correct": 0
+  },
+  {
+      "id": 41,
+      "question": "Which runtime is required to install the CLI package dependencies in the Devnet guide?",
+      "answers": ["Bun", "Deno", "Node.js", "PNPM"],
+      "correct": 0
+  },
+  {
+      "id": 42,
+      "question": "Which of the following types is NOT part of the elementary stype?",
+      "answers": ["sbytes", "sbool", "suint", "saddress"],
+      "correct": 0
+  },
+  {
+      "id": 43,
+      "question": "Which slogan is used for Seismic in the blog?",
+      "answers": ["The encrypted blockchain", "The fastest Layer 2", "The modular rollup stack", "The DeFi cloud"],
+      "correct": 0
+  },
+  {
+      "id": 44,
+      "question": "Which open‑source components did Seismic fork to implement encryption?",
+      "answers": ["Solidity, Reth, Foundry", "Solidity, Cosmos SDK, Tendermint", "Move, Aptos, Diem", "Substrate, Polkadot"],
+      "correct": 0
+  },
+  {
+      "id": 45,
+      "question": "What portion of its stack does Seismic call open‑source?",
+      "answers": ["99%", "90%", "75%", "50%"],
+      "correct": 0
+  },
+  {
+      "id": 46,
+      "question": "Which Discord channel is recommended for Devnet questions?",
+      "answers": ["#devnet", "#general", "#support", "#staking"],
+      "correct": 0
+  },
+  {
+      "id": 47,
+      "question": "What environment do Windows users get recommended to install before following the instructions?",
+      "answers": ["WSL", "Docker", "Cygwin", "Hyper‑V"],
+      "correct": 0
+  },
+  {
+      "id": 48,
+      "question": "Which step provides test ETH in the Devnet?",
+      "answers": ["Using the faucet", "Airdrop script", "Mining on the testnet", "Transfer through MetaMask"],
+      "correct": 0
+  },
+  {
+      "id": 49,
+      "question": "CLOAD/CSTORE opcodes are analogous to which standard EVM opcodes?",
+      "answers": ["SLOAD/SSTORE", "MLOAD/MSTORE", "TLOAD/TSTORE", "ELOAD/ESTORE"],
+      "correct": 0
+  },
+  {
+      "id": 50,
+      "question": "Which statement about the Seismic Devnet is true?",
+      "answers": ["Decryption keys are public, so don't store real data", "The Devnet is closed and invite‑only", "The Devnet rewards every deployment", "The Devnet uses Chain ID 1"],
+      "correct": 0
+  }
+]

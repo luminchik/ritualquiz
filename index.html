@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seismic Quiz - Main Menu</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+    
+    .main-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    
+    .menu-title {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+    
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 250px;
+    }
+    
+    .menu-button {
+      background-color: #7289da;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      text-align: center;
+      font-family: "Press Start 2P", cursive;
+    }
+    
+    .menu-button:hover {
+      background-color: #5e77d4;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="space-background"></div>
+  
+  <div id="auth-container">
+    <div id="auth-status">
+      <div id="not-logged">
+        <button id="discord-login" class="auth-button">
+          <img src="images/discord-icon-svgrepo-com.svg" alt="Discord logo" width="20">
+          Login with Discord
+        </button>
+      </div>
+      <div id="logged-in" style="display: none;">
+        <div id="user-info">
+          <img id="user-avatar" src="" alt="User avatar" width="32" height="32">
+          <span id="username"></span>
+        </div>
+        <button id="logout" class="auth-button">Logout</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main-menu">
+    <!-- Контейнер для изображения play.png -->
+    <div class="play-image-container" style="position: absolute; top: 35%; left: 58%; transform: translate(-50%, 100px);">
+      <img src="images/play.png" alt="Play" id="play-image" style="width: 450px; height: auto; cursor: pointer;">
+    </div>
+    
+    <!-- Место для второго изображения -->
+    <div class="leaderboard-image-container" style="position: absolute; top: 70%; left: 30%; transform: translate(-50%, 100px);">
+      <img src="images/leaderboard.png" alt="Leaderboard" id="leaderboard-image" style="width: 350px; height: auto; cursor: pointer;">
+    </div>
+  </div>
+
+  <script>
+    // Функции для работы с Discord авторизацией
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch('/api/auth-status');
+        const data = await response.json();
+        
+        if (data.authenticated) {
+          // Пользователь авторизован
+          $('#not-logged').hide();
+          $('#logged-in').show();
+          $('#username').text(data.user.username);
+          
+          // Устанавливаем аватар пользователя
+          if (data.user.avatar) {
+            const avatarUrl = `https://cdn.discordapp.com/avatars/${data.user.id}/${data.user.avatar}.png`;
+            $('#user-avatar').attr('src', avatarUrl);
+          } else {
+            // Дефолтный аватар если у пользователя нет аватара
+            $('#user-avatar').attr('src', 'https://cdn.discordapp.com/embed/avatars/0.png');
+          }
+        } else {
+          // Пользователь не авторизован
+          $('#not-logged').show();
+          $('#logged-in').hide();
+        }
+      } catch (error) {
+        console.error('Ошибка при проверке статуса авторизации:', error);
+      }
+    }
+    
+    // Обработчики событий для кнопок авторизации
+    function setupAuthButtons() {
+      // Кнопка входа через Discord
+      $('#discord-login').on('click', function() {
+        window.location.href = '/auth/discord';
+      });
+      
+      // Кнопка выхода
+      $('#logout').on('click', function() {
+        window.location.href = '/auth/logout';
+      });
+      
+      // Проверяем URL для параметра loggedIn
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('loggedIn') === 'true') {
+        // Обновляем интерфейс после успешного входа
+        checkAuthStatus();
+        // Очищаем URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+    
+    // Запускаем игру при клике на play-image
+    function setupPlayButton() {
+      $('#play-image').on('click', function() {
+        window.location.href = '/game';
+      });
+      
+      // Обработчик для изображения лидерборда
+      $('#leaderboard-image').on('click', function() {
+        window.location.href = '/leaderboard';
+      });
+    }
+    
+    // Создаем фон
+    function createSpaceBackground() {
+      const spaceBackground = $("#space-background");
+      if (spaceBackground.length === 0) {
+        $("<div id='space-background'></div>").css({
+          'position': 'fixed',
+          'top': 0,
+          'left': 0,
+          'width': '100%',
+          'height': '100%',
+          'z-index': -1,
+          'overflow': 'hidden',
+          'background-image': 'url("images/backgroundseismic.png")',
+          'background-size': '100% 100%',
+          'background-position': 'center'
+        }).prependTo("body");
+      }
+    }
+    
+    $(document).ready(function() {
+      createSpaceBackground();
+      setupAuthButtons();
+      setupPlayButton();
+      checkAuthStatus();
+    });
+  </script>
+</body>
+</html>
