@@ -19,7 +19,8 @@ const createSessionStore = require('./src/middleware/session-store');
 
 // Настройки сервера
 const PORT = process.env.PORT || 3000;
-const SESSION_SECRET = process.env.SESSION_SECRET || 'seismic-quiz-game-secret';
+// Session secret is loaded once with a fallback for local development
+const SESSION_SECRET = process.env.SESSION_SECRET || 'dev-secret-key';
 
 // Создаем приложение Express
 const app = express();
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(session({
   store: createSessionStore(),
-  secret: process.env.SESSION_SECRET || 'dev-secret-key',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
